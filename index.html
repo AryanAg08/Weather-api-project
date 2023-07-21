@@ -3,21 +3,39 @@
 <head>
   <title>Weather Project</title>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <div class="container">
-    <h1>Weather Project</h1>
-    <div class="search-bar">
-      <input type="text" id="city-input" placeholder="Enter city name">
-      <button id="search-button">Search</button>
-    </div>
+  <video id="video-background" autoplay muted loop>
+    <source src="clouds.webm" type="video/mp4">
+   
+</video>
+
+<div id="display-box">
+    <h1 class="taggg">Weather Project</h1>
+ 
+    <section >
+      <div class="search">
+        
+        <div class="icon"></div>
+    
+        <div class="input">
+          <input type="text" placeholder="Search any city!" id="city-input">
+          <button  class="search-button" id="search-button"">Search</button>
+        </div>
+    
+        <span class="clear" onclick="document.getElementById('mysearch').value = ''">x</span>
+      </div>
+    </section>
+
     <ul class="city-list">
       <li class="city">London</li>
       <li class="city">New York</li>
       <li class="city">Tokyo</li>
       <li class="city">Sydney</li>
     </ul>
-    <div class="weather-data">
+    
+    <div class="weather-data" id="weather-data">
       <h2 id="city"></h2>
       <p id="temperature"></p>
       <p id="maxtemp"></p>
@@ -29,7 +47,8 @@
       <p id="sunset"></p>
       <p id="wind"></p>
     </div>
-  </div>
+    </div>
+
 
   <script src="script.js"></script>
 </body>

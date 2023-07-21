@@ -1,3 +1,11 @@
+const icon = document.querySelector(".icon");
+const search = document.querySelector(".search");
+
+icon.onclick = function () {
+	search.classList.toggle("active");
+};
+
+
 
  const apiKey = '75f66dda1a95538b10a3cd687025ff3e';
 
@@ -35,30 +43,42 @@ function fetchWeatherData(city) {
       return response.json();
     })
     .then(data => {
-                    console.log(data);
         const temperature = Math.round(data.main.temp - 273.15);
         const description = data.weather[0].description;
         const maxtemp = Math.round(data.main.temp_max - 273.15);
         const mintemp = Math.round(data.main.temp_min - 273.15);
-        const location = `Latitude =` + data.coord.lat + `\nLongitude =` + data.coord.lon;
+        // const location = `Latitude =` + data.coord.lat + `\nLongitude =` + data.coord.lon;
         const pressure = data.main.pressure;
         const sunrise = data.sys.sunrise;
         const sunset = data.sys.sunset;
         const wind = data.wind.speed;
-      
+        let weatherIcon;
+       if (temperature >= 20) {
+           weatherIcon = "Temperature: ☀️";
+       }
+       else weatherIcon = "Temperature: ❄️";
+
+        var date = new Date(sunrise * 1000);
+        var hours = date.getHours();    
+        var minutes = "0" + date.getMinutes();
+        var formattedTime = hours + ':' + minutes.substr(-2) ;
+
+      var dat2 = new Date(sunset * 1000);
+      var hour = dat2.getHours();
+      var min = "0" + dat2.getMinutes();
+      var sunsetime = hour + ":" + min.substr(-2);
 
 
-
-      document.getElementById('city').textContent = city;
-      document.getElementById('temperature').textContent = temperature + '°C';
+      document.getElementById('city').textContent = "City:" + city;
+      document.getElementById('temperature').textContent = weatherIcon + temperature + '°C';
       document.getElementById('description').textContent = description;
-      document.getElementById('maxtemp').textContent = maxtemp;
-      document.getElementById('mintemp').textContent = mintemp;
-      document.getElementById('location').textContent = location;
-      document.getElementById('Pressure').textContent = pressure;
-      document.getElementById('sunrise').textContent = sunrise;
-      document.getElementById('sunset').textContent = sunset;
-      document.getElementById('wind').textContent = wind;
+      // document.getElementById('maxtemp').textContent = maxtemp;
+      // document.getElementById('mintemp').textContent = mintemp;
+      // document.getElementById('location').textContent = "Location 🗺️" + location;
+      document.getElementById('Pressure').textContent = "Pressure:" + pressure + "mbar";
+      document.getElementById('sunrise').textContent = "Sunrise Time 🌄: " + formattedTime;
+      document.getElementById('sunset').textContent = "sunset Time 🌅: " + sunsetime;
+      document.getElementById('wind').textContent = "wind Speed 🍃" + wind + "KM/H" ;
     })
     .catch(error => {
       console.log(error);
